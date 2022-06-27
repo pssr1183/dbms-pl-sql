@@ -1,10 +1,14 @@
-DECLARE 
-   -- variable declaration 
-   message  varchar2(20):= 'Hello, World!'; 
-BEGIN 
-   /* 
-   *  PL/SQL executable statement(s) 
-   */ 
-   dbms_output.put_line(message); 
-END; 
-/
+--exception 1--
+declare 
+under_age exception;
+sailor sailors.sname%type;
+age1 sailors.age%type;
+begin
+select sname, age into sailor ,age1 from sailors where age<18;
+if age1<18 then
+raise under_age;
+end if;
+exception
+when under_age then
+dbms_output.put_line('insufficient age');
+end;
